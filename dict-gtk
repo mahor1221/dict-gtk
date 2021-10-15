@@ -1,0 +1,9 @@
+#!/bin/bash
+
+word="$(zenity --title=Dict-gtk --class=dict-gtk --entry --text='Enter a word')"
+if [ "$?" = 0 ]; then
+    dict ${word} 2>&1 | tee /tmp/dict-gtk
+    zenity --title=Dict-gtk --text-info --font="12" --filename="/tmp/dict-gtk" \
+        --width=960 --height=810
+    rm -f /tmp/dict-gtk
+fi
